@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 			"email",
 			"affiliationId"
 		})
-public class Auteur 
+public class Author 
 {
 	private ArrayList<Integer> affiliationId;
 	

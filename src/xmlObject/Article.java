@@ -24,8 +24,8 @@ import javax.xml.bind.annotation.XmlType;
 public class Article implements Comparable<Article>
 {
 	
-	private ArrayList<Affiliation> affiliations;
-	private ArrayList<Auteur> auteurs;
+	private ArrayList<Affiliate> affiliations;
+	private ArrayList<Author> auteurs;
 
 	private String abstrace_libelle;
 	private String id;
@@ -59,21 +59,21 @@ public class Article implements Comparable<Article>
 		return abstrace_libelle;
 	}
 
-	public Affiliation getAffiliationById(int id)
+	public Affiliate getAffiliationById(int id)
 	{
-		for (Affiliation affiliation : affiliations)
+		for (Affiliate affiliation : affiliations)
 			if (id == affiliation.getId())
 				return affiliation;
 		
 		return null;
 	}
 
-	public ArrayList<Affiliation> getAffiliations() 
+	public ArrayList<Affiliate> getAffiliations() 
 	{
 		return affiliations;
 	}
 
-	public ArrayList<Auteur> getAuteurs() 
+	public ArrayList<Author> getAuteurs() 
 	{
 		return auteurs;
 	}
@@ -125,14 +125,14 @@ public class Article implements Comparable<Article>
 	}
 
 	@XmlElementWrapper(name = "affiliations")
-	public void setAffiliations(ArrayList<Affiliation> affiliations) 
+	public void setAffiliations(ArrayList<Affiliate> affiliations) 
 	{
 		this.affiliations = affiliations;
 	}
 
 	@XmlElementWrapper(name = "auteurs")
 	@XmlElement(name = "auteur")
-	public void setAuteurs(ArrayList<Auteur> auteurs) 
+	public void setAuteurs(ArrayList<Author> auteurs) 
 	{
 		this.auteurs = auteurs;
 	}

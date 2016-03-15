@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 
 @XmlRootElement(name = "acceptations")
-public class Acceptation 
+public class Acceptance 
 {
 	private int soumission;
 
