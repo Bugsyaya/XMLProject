@@ -1,12 +1,15 @@
 package xmlObject;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
 @XmlRootElement(name = "acceptations")
 public class Acceptation 
 {
-	private String id;
 	private int soumission;
+
+	private String id;
 	private String name;
 	
 	public String getId() 
