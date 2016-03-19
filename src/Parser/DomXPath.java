@@ -5,6 +5,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Node;
@@ -23,6 +24,9 @@ public class DomXPath {
 	
 	// Document à parser
 	private Document xmlDocument = null;
+	
+	// Parser utilisé
+	XPath xPath = XPathFactory.newInstance().newXPath();
 
 	/**
 	 * Constructeur.
@@ -33,8 +37,6 @@ public class DomXPath {
 	 * @param fileName
 	 */
 	public DomXPath(String fileName) {
-		
-		XPath xPath = XPathFactory.newInstance().newXPath();
 		
 		
 		// Parsing et chargement du doc. en mémoire.
@@ -53,7 +55,7 @@ public class DomXPath {
 		
 	}
 	
-	public ArrayList<Conference> buildConferences() {
+	public ArrayList<Conference> buildConferences() throws XPathExpressionException {
 
 		// Liste de Conferences (objets) à renvoyer.
 		ArrayList<Conference> conferences = new ArrayList<Conference>();
@@ -61,6 +63,15 @@ public class DomXPath {
 		Element root = xmlDocument.getDocumentElement();
 		
 		// Pour chaque conférence dans le document:
+		NodeList conf_nodes = (NodeList)xPath.evaluate(
+			"//conference",
+			xmlDocument.getDocumentElement(),
+			XPathConstants.NODESET
+		);
+		for (int i = 0; i < conf_nodes.getLength(); ++i) {
+			Node conf = conf_nodes.item(i);
+			System.out.println(conf);
+		
 		
 			// On trouve un noeud 'édition'
 			
@@ -72,6 +83,8 @@ public class DomXPath {
 				
 				// On finit de builder la conférence
 				// et on l'affecte à la liste des conférences.
+			
+		}  // fin boucle conférences
 		
 		return conferences;
 		
