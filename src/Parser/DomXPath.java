@@ -55,6 +55,13 @@ public class DomXPath {
 		
 	}
 	
+	/**
+	 * Principale fonction. Son rôle est de
+	 * construire les modèles objet à partir
+	 * du document parsé.
+	 * @return
+	 * @throws XPathExpressionException
+	 */
 	public ArrayList<Conference> buildConferences() throws XPathExpressionException {
 
 		// Liste de Conferences (objets) à renvoyer.
@@ -70,8 +77,7 @@ public class DomXPath {
 		);
 		for (int i = 0; i < conf_nodes.getLength(); ++i) {
 			Node conf = conf_nodes.item(i);
-			System.out.println(conf);
-		
+			dump_node(conf);
 		
 			// On trouve un noeud 'édition'
 			
@@ -90,4 +96,17 @@ public class DomXPath {
 		
 	}
 
+	/**
+	 * Fonction helper pour visualiser le contenu d'un noeud.
+	 */
+	public void dump_node(Node n) {
+		System.out.println("================");
+		System.out.println("Nom : " + n.getNodeName());
+		System.out.println("Texte : ");
+		System.out.println(n.getTextContent());
+		System.out.println("Attributes : ");
+		System.out.println(n.getAttributes());
+		System.out.println("Num. of children : " + n.getChildNodes().getLength());
+		System.out.println();
+	}
 }
