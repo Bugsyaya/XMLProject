@@ -26,6 +26,7 @@ public class Main {
 		System.out.println("Test du parser DomXPath");
 		System.out.println("=======================");
 		DomXPath parser = new DomXPath(fileName);
+		System.out.println("L'analyse du document peut prendre quelques secondes...");
 		try {
 			ArrayList<Conference> conferences = parser.buildConferences();
 			for (Conference c: conferences) {

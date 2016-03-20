@@ -9,7 +9,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Node;
-
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -23,6 +23,8 @@ import xmlObject.Edition;
 import xmlObject.Type;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -34,6 +36,9 @@ public class DomXPath {
 	
 	// Parser utilisé
 	XPath xPath = XPathFactory.newInstance().newXPath();
+	
+	// Juste pour les conversions de dates
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * Constructeur.
@@ -82,7 +87,7 @@ public class DomXPath {
 		for (int i = 0; i < conf_nodes.getLength(); ++i) {
 			Node conf = conf_nodes.item(i);
 		
-			// On trouve un noeud 'édition'
+			// On trouve le noeud 'édition'
 			Node edition_node = (Node)xPath.evaluate(
 				".//edition",
 				conf,
@@ -91,21 +96,54 @@ public class DomXPath {
 			
 			// Récupérer ici les informations à l'aide 
 			// du xpath approprié
+			String acronyme = ((Node)xPath.evaluate(
+				".//acronyme",
+				edition_node,
+				XPathConstants.NODE)).getTextContent();
 			String titreConf = ((Node)xPath.evaluate(
-					".//titre",
-					edition_node,
-					XPathConstants.NODE)).getTextContent();
-			Date dateStart = new Date();
-			Date dateEnd = new Date();
-			String pays = "";
-			String ville = "";
-			ArrayList<String> presidents = new ArrayList<>();
-			String siteWeb = "";
-			String acronyme = "";
-			ArrayList<String> bestArticle = new ArrayList<>();
-			ArrayList<Acceptance> acceptances = new ArrayList<>();
-			ArrayList<Type> typeArticles = new ArrayList<>();
+				".//titre",
+				edition_node,
+				XPathConstants.NODE)).getTextContent();
+			String ville = ((Node)xPath.evaluate(
+				".//ville",
+				edition_node,
+				XPathConstants.NODE)).getTextContent();
+			String pays = ((Node)xPath.evaluate(
+				".//pays",
+				edition_node,
+				XPathConstants.NODE)).getTextContent();
 			
+			Date dateStart = null;
+			Date dateEnd = null;
+			try {
+				dateStart = dateFormat.parse(
+					((Node)xPath.evaluate(
+						".//dateDebut",
+						edition_node,
+						XPathConstants.NODE)
+					).getTextContent()
+				);
+				dateEnd = dateFormat.parse(
+					((Node)xPath.evaluate(
+						".//dateFin",
+						edition_node,
+						XPathConstants.NODE)
+					).getTextContent()
+				);
+			} catch (DOMException e1) {
+				System.out.println("Problème de conversion de date : " + e1.getMessage());
+			} catch (ParseException e1) {
+				System.out.println("Problème de format date : " + e1.getMessage());
+			}
+			
+			ArrayList<String> presidents = new ArrayList<>();
+			ArrayList<Type> typeArticles = new ArrayList<>();
+			String siteWeb = ((Node)xPath.evaluate(
+				".//siteWeb",
+				edition_node,
+				XPathConstants.NODE)).getTextContent();
+			ArrayList<Acceptance> acceptances = new ArrayList<>();
+			ArrayList<String> bestArticle = new ArrayList<>();
 			
 			// On construit le modèle objet qui sera
 			// ajouté à l'objet conference
@@ -121,10 +159,8 @@ public class DomXPath {
 			e.setBestArticle(bestArticle);
 			e.setAcceptances(acceptances);
 			e.setTypeArticles(typeArticles);
-			
-			
-	
-			// Et une liste d'articles
+		
+			// Construction de la liste d'articles
 			NodeList article_nodes = (NodeList)xPath.evaluate(
 				".//article",
 				conf,
@@ -141,12 +177,21 @@ public class DomXPath {
 				ArrayList<Author> auteurs = new ArrayList<>();
 				ArrayList<Affiliate> affiliations = new ArrayList<>();
 				String titreArt = ((Node)xPath.evaluate(
-						".//titre",
-						article_node,
-						XPathConstants.NODE)).getTextContent();
-				String type = new String();
-				String resume = "";
-				String abstract_libelle = "";
+					".//titre | .//title",
+					article_node,
+					XPathConstants.NODE)).getTextContent();
+				String type = ((Node)xPath.evaluate(
+					".//type",
+					article_node,
+					XPathConstants.NODE)).getTextContent();
+				String resume = ((Node)xPath.evaluate(
+					".//resume",
+					article_node,
+					XPathConstants.NODE)).getTextContent();
+				String abstract_libelle = ((Node)xPath.evaluate(
+					".//abstract",
+					article_node,
+					XPathConstants.NODE)).getTextContent();
 				
 				// On ajoute l'article à la liste d'articles 
 				// de cette conférence
