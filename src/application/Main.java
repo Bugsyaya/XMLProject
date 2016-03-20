@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import javax.xml.xpath.XPathExpressionException;
 
 import Parser.DomXPath;
+import Parser.Sax;
 import xmlObject.Article;
 import xmlObject.Conference;
+import Parser.HtmlGenerate;
+
 
 public class Main {
 
@@ -21,7 +24,12 @@ public class Main {
 		System.out.println();
 		System.out.println("Test du parser Sax");
 		System.out.println("=======================");
-		
+		final ArrayList<Conference> conferencesSax = new Sax(HtmlGenerate.XML_FILE_NAME).parserXml();
+
+        if (conferencesSax != null) {
+            System.out.println(conferencesSax.size() + " conférences ont été récupérées du fichier XML\n");
+            HtmlGenerate.generateHomePage(conferencesSax);
+        }
 		
 		System.out.println();
 		System.out.println("Test du parser DomXPath");
