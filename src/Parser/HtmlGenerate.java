@@ -29,7 +29,7 @@ public class HtmlGenerate
     public static final String CONFERENCE_ITEM_TEMPLATE_NAME = "confItemTemplate.html";
 
     private static final SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
-    private static final SimpleDateFormat fullDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
+    private static final SimpleDateFormat fullDateFormat = new SimpleDateFormat("dd MM yyyy");
 
     private static void saveInFile(final String html, final String filePath, final String fileName) 
     {
@@ -50,9 +50,14 @@ public class HtmlGenerate
         }
     }
 
-    public static void generateHomePage(List<Conference> conferences) 
+    public static void generateHomePage(ArrayList<Conference> conferences) 
     {
         String htmlTemplateFile = TEMPLATES_PATH + HOME_PAGE_TEMPLATE_NAME;
+
+        System.out.println(TEMPLATES_PATH);
+        System.out.println(HOME_PAGE_TEMPLATE_NAME);
+        System.out.println("COucou");
+        System.out.println(htmlTemplateFile);
 
         String htmlString = readTemplate(htmlTemplateFile);
 
@@ -62,7 +67,7 @@ public class HtmlGenerate
             htmlString = htmlString.replace("$conferences", getConferences(conferences));
         }
 
-        saveInFile(htmlString, HTML_PATH, HOME_PAGE_FILE_NAME);
+        saveInFile(htmlString, TEMPLATES_PATH, HOME_PAGE_FILE_NAME);
     }
 
     private static String generateConferencePage(Conference conference) 
@@ -112,7 +117,7 @@ public class HtmlGenerate
         return formatedStr;
     }
 
-    private static String getConferences(final List<Conference> conferences) 
+    private static String getConferences(ArrayList<Conference> conferences) 
     {
         String htmlTemplateFile = TEMPLATES_PATH + CONFERENCE_ITEM_TEMPLATE_NAME;
 

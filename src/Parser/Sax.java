@@ -75,10 +75,11 @@ public class Sax extends DefaultHandler implements ParserInterface
 		{
 			System.out.println("[Error] " + e.getMessage());
 		}
+
 		return conferences;
 	}
 	
-	public void elementStart(String stringA, String stringB, String nameE, Attributes attributes)
+	public void elementStart(String nameE, Attributes attributes)
 	{
 		if (nameE.equals("conference"))
 			conference = new Conference();
@@ -177,7 +178,7 @@ public class Sax extends DefaultHandler implements ParserInterface
 		}
 	}
 	
-	public void endElement(String s, String s1, String elementName) throws SAXException 
+	public void endElement(String elementName) throws SAXException 
 	{
         if (elementName.equals("conference")) 
         {
@@ -364,10 +365,5 @@ public class Sax extends DefaultHandler implements ParserInterface
                     article.setKeyword(value);
             }
         }
-    }
-	
-	public void characters(char[] ac, int i, int j)
-	{
-        value = new String(ac, i, j);
     }
 }

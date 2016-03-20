@@ -26,6 +26,8 @@ public class Main {
 		System.out.println("=======================");
 		final ArrayList<Conference> conferencesSax = new Sax(HtmlGenerate.XML_FILE_NAME).parserXml();
 
+		System.out.println(HtmlGenerate.XML_FILE_NAME);
+		
         if (conferencesSax != null) {
             System.out.println(conferencesSax.size() + " conférences ont été récupérées du fichier XML\n");
             HtmlGenerate.generateHomePage(conferencesSax);
