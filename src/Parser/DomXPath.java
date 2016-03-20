@@ -238,6 +238,11 @@ public class DomXPath {
 				// du xpath approprié
 				ArrayList<Author> auteurs = new ArrayList<>();
 				ArrayList<Affiliate> affiliations = new ArrayList<>();
+				String art_id = (String)xPath.evaluate(
+						"./@id",
+						article_node,
+						XPathConstants.STRING
+					);
 				String titreArt = ((Node)xPath.evaluate(
 					".//titre | .//title",
 					article_node,
@@ -307,6 +312,7 @@ public class DomXPath {
 				// On ajoute l'article à la liste d'articles 
 				// de cette conférence
 				Article a = new Article();
+				a.setId(art_id);
 				a.setAuteurs(auteurs);
 				a.setAffiliations(affiliations);
 				a.setTitre(titreArt);
