@@ -140,6 +140,77 @@ public class DomXPath {
 			ArrayList<Acceptance> acceptances = new ArrayList<>();
 			ArrayList<String> bestArticle = new ArrayList<>();
 			
+			// Récupération des présidents
+			NodeList president_nodes = (NodeList)xPath.evaluate(
+				".//presidents/nom", 
+				edition_node, 
+				XPathConstants.NODESET
+			);
+			for(int p = 0; p < president_nodes.getLength(); ++p) {
+				Node president_node = president_nodes.item(p);
+				presidents.add(president_node.getTextContent());
+			}
+			
+			// Récupération des types d'articles
+			NodeList type_nodes = (NodeList)xPath.evaluate(
+				".//typeArticles/type", 
+				edition_node,
+				XPathConstants.NODESET
+			);
+			for(int t = 0; t < type_nodes.getLength(); ++t) {
+				Node type_node = type_nodes.item(t);
+				String type_id = (String)xPath.evaluate(
+					"./@id",
+					type_node,
+					XPathConstants.STRING
+				);
+				String type_name = type_node.getTextContent();
+				Type type = new Type();
+				type.setId(type_id);
+				type.setName(type_name);
+				typeArticles.add(type);
+			}
+			
+			// Récupération des acceptances
+			NodeList acceptance_nodes = (NodeList)xPath.evaluate(
+				".//statistiques/acceptations", 
+				edition_node,
+				XPathConstants.NODESET
+			);
+			for(int a = 0; a < type_nodes.getLength(); ++a) {
+				Node acceptance_node = type_nodes.item(a);
+				
+				String acc_name = acceptance_node.getTextContent();
+				String acc_id = (String)xPath.evaluate(
+						"./@id",
+						acceptance_node,
+						XPathConstants.STRING
+					);
+				int soumission = ((Double)xPath.evaluate(
+						"./@soumissions",
+						acceptance_node,
+						XPathConstants.NUMBER
+					)
+				).intValue();
+				
+				Acceptance acc = new Acceptance();
+				acc.setId(acc_id);
+				acc.setName(acc_name);
+				acc.setSoumission(soumission);
+				acceptances.add(acc);
+			}
+			
+			// Récupération des best articles
+			NodeList best_nodes = (NodeList)xPath.evaluate(
+				"./meilleurArticle/articleId",
+				edition_node,
+				XPathConstants.NODESET
+			);
+			for(int b = 0; b < best_nodes.getLength(); ++b) {
+				Node best_node = best_nodes.item(b);
+				bestArticle.add(best_node.getTextContent());
+			}
+			
 			// On construit le modèle objet qui sera
 			// ajouté à l'objet conference
 			Edition e = new Edition();
@@ -188,7 +259,6 @@ public class DomXPath {
 					article_node,
 					XPathConstants.NODE)).getTextContent();
 				
-				/*
 				// Récupération des affiliations de l'article
 				NodeList affiliation_nodes = (NodeList)xPath.evaluate(
 					".//affiliations/affiliation", 
@@ -196,19 +266,8 @@ public class DomXPath {
 					XPathConstants.NODESET
 				);
 				for (int k = 0; k < affiliation_nodes.getLength(); ++k) {
-					Node affiliation_node = affiliation_nodes.item(i);
-					int id = 0;
-					try {
-						id = Integer.valueOf(
-							(String)xPath.evaluate(
-								"./@id", 
-								affiliation_node,
-								XPathConstants.STRING
-							)
-						);
-					} catch (NumberFormatException e1) {
-						System.out.println(e1.getMessage());
-					}
+					Node affiliation_node = affiliation_nodes.item(k);
+					int id = 0;  // TODO
 					String name = affiliation_node.getTextContent();
 					
 					Affiliate aff = new Affiliate();
@@ -217,15 +276,14 @@ public class DomXPath {
 					affiliations.add(aff);
 				}
 				
-				
 				// Récupération des auteurs de l'article
 				NodeList auteurs_nodes = (NodeList)xPath.evaluate(
 					".//auteurs/auteur", 
 					article_node, 
 					XPathConstants.NODESET
 				);
-				for (int l = 0; l < affiliation_nodes.getLength(); ++l) {
-					Node auteur_node = auteurs_nodes.item(i);
+				for (int l = 0; l < auteurs_nodes.getLength(); ++l) {
+					Node auteur_node = auteurs_nodes.item(l);
 
 					String nom = ((Node)xPath.evaluate(
 						".//nom", 
@@ -239,13 +297,7 @@ public class DomXPath {
 						XPathConstants.NODE)
 					).getTextContent();
 					
-					int aff_id = Integer.valueOf(
-						((Node)xPath.evaluate(
-							".//affiliationId", 
-							auteur_node, 
-							XPathConstants.NODE)
-						).getTextContent()
-					);
+					int aff_id = 0;  // TODO
 					ArrayList<Integer> affiliation_ids = new ArrayList<>();
 					affiliation_ids.add(aff_id);
 
@@ -255,7 +307,6 @@ public class DomXPath {
 					auth.setAffiliationId(affiliation_ids);
 					auteurs.add(auth);
 				}
-				*/
 				
 				// On ajoute l'article à la liste d'articles 
 				// de cette conférence
