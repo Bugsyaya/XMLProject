@@ -188,6 +188,75 @@ public class DomXPath {
 					article_node,
 					XPathConstants.NODE)).getTextContent();
 				
+				/*
+				// Récupération des affiliations de l'article
+				NodeList affiliation_nodes = (NodeList)xPath.evaluate(
+					".//affiliations/affiliation", 
+					article_node, 
+					XPathConstants.NODESET
+				);
+				for (int k = 0; k < affiliation_nodes.getLength(); ++k) {
+					Node affiliation_node = affiliation_nodes.item(i);
+					int id = 0;
+					try {
+						id = Integer.valueOf(
+							(String)xPath.evaluate(
+								"./@id", 
+								affiliation_node,
+								XPathConstants.STRING
+							)
+						);
+					} catch (NumberFormatException e1) {
+						System.out.println(e1.getMessage());
+					}
+					String name = affiliation_node.getTextContent();
+					
+					Affiliate aff = new Affiliate();
+					aff.setId(id);
+					aff.setName(name);
+					affiliations.add(aff);
+				}
+				
+				
+				// Récupération des auteurs de l'article
+				NodeList auteurs_nodes = (NodeList)xPath.evaluate(
+					".//auteurs/auteur", 
+					article_node, 
+					XPathConstants.NODESET
+				);
+				for (int l = 0; l < affiliation_nodes.getLength(); ++l) {
+					Node auteur_node = auteurs_nodes.item(i);
+
+					String nom = ((Node)xPath.evaluate(
+						".//nom", 
+						auteur_node, 
+						XPathConstants.NODE)
+					).getTextContent();
+					
+					String email = ((Node)xPath.evaluate(
+						".//email", 
+						auteur_node, 
+						XPathConstants.NODE)
+					).getTextContent();
+					
+					int aff_id = Integer.valueOf(
+						((Node)xPath.evaluate(
+							".//affiliationId", 
+							auteur_node, 
+							XPathConstants.NODE)
+						).getTextContent()
+					);
+					ArrayList<Integer> affiliation_ids = new ArrayList<>();
+					affiliation_ids.add(aff_id);
+
+					Author auth = new Author();
+					auth.setNom(nom);
+					auth.setEmail(email);
+					auth.setAffiliationId(affiliation_ids);
+					auteurs.add(auth);
+				}
+				*/
+				
 				// On ajoute l'article à la liste d'articles 
 				// de cette conférence
 				Article a = new Article();
