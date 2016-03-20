@@ -66,7 +66,7 @@ public class DomXPath {
 	 * Principale fonction. Son rôle est de
 	 * construire les modèles objet à partir
 	 * du document parsé.
-	 * @return
+	 * @return ArrayList<Conference>
 	 * @throws XPathExpressionException
 	 */
 	public ArrayList<Conference> buildConferences() throws XPathExpressionException {
@@ -91,7 +91,10 @@ public class DomXPath {
 			
 			// Récupérer ici les informations à l'aide 
 			// du xpath approprié
-			String titreConf = "";
+			String titreConf = ((Node)xPath.evaluate(
+					".//titre",
+					edition_node,
+					XPathConstants.NODE)).getTextContent();
 			Date dateStart = new Date();
 			Date dateEnd = new Date();
 			String pays = "";
@@ -137,7 +140,10 @@ public class DomXPath {
 				// du xpath approprié
 				ArrayList<Author> auteurs = new ArrayList<>();
 				ArrayList<Affiliate> affiliations = new ArrayList<>();
-				String titreArt = "";
+				String titreArt = ((Node)xPath.evaluate(
+						".//titre",
+						article_node,
+						XPathConstants.NODE)).getTextContent();
 				String type = new String();
 				String resume = "";
 				String abstract_libelle = "";
@@ -161,6 +167,8 @@ public class DomXPath {
 			Conference c = new Conference();
 			c.setEdition(e);
 			c.setArticles(articles);
+			
+			conferences.add(c);
 			
 		}  // fin boucle conférences
 		

@@ -1,6 +1,11 @@
 package Parser;
 
+import java.util.ArrayList;
+
 import javax.xml.xpath.XPathExpressionException;
+
+import xmlObject.Article;
+import xmlObject.Conference;
 
 public class Main {
 
@@ -22,7 +27,13 @@ public class Main {
 		System.out.println("=======================");
 		DomXPath parser = new DomXPath(fileName);
 		try {
-			parser.buildConferences();
+			ArrayList<Conference> conferences = parser.buildConferences();
+			for (Conference c: conferences) {
+				System.out.println("Conférence : " + c.getEdition().getTitre());
+				for (Article a: c.getArticles()) {
+					System.out.println(" . " + a.getTitre());
+				}
+			}
 		} catch(XPathExpressionException e) {
 			System.out.println("Problème dans l'expression XPath : ");
 			System.out.println(e.getMessage());
