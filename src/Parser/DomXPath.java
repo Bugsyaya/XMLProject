@@ -14,10 +14,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import xmlObject.Acceptance;
+import xmlObject.Affiliate;
+import xmlObject.Article;
+import xmlObject.Author;
 import xmlObject.Conference;
+import xmlObject.Edition;
+import xmlObject.Type;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class DomXPath {
@@ -70,25 +77,90 @@ public class DomXPath {
 		Element root = xmlDocument.getDocumentElement();
 		
 		// Pour chaque conférence dans le document:
-		NodeList conf_nodes = (NodeList)xPath.evaluate(
-			"//conference",
-			xmlDocument.getDocumentElement(),
-			XPathConstants.NODESET
-		);
+		String expression = "/conferences/conference";	        
+        NodeList conf_nodes = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
 		for (int i = 0; i < conf_nodes.getLength(); ++i) {
 			Node conf = conf_nodes.item(i);
-			dump_node(conf);
 		
 			// On trouve un noeud 'édition'
+			Node edition_node = (Node)xPath.evaluate(
+				".//edition",
+				conf,
+				XPathConstants.NODE
+			);
 			
-			// Une liste d'articles
+			// Récupérer ici les informations à l'aide 
+			// du xpath approprié
+			String titreConf = "";
+			Date dateStart = new Date();
+			Date dateEnd = new Date();
+			String pays = "";
+			String ville = "";
+			ArrayList<String> presidents = new ArrayList<>();
+			String siteWeb = "";
+			String acronyme = "";
+			ArrayList<String> bestArticle = new ArrayList<>();
+			ArrayList<Acceptance> acceptances = new ArrayList<>();
+			ArrayList<Type> typeArticles = new ArrayList<>();
 			
-			// Pour chaque article : 
+			
+			// On construit le modèle objet qui sera
+			// ajouté à l'objet conference
+			Edition e = new Edition();
+			e.setTitre(titreConf);
+			e.setDateStart(dateStart);
+			e.setDateEnd(dateEnd);
+			e.setPays(pays);
+			e.setVille(ville);
+			e.setPresidents(presidents);
+			e.setSiteWeb(siteWeb);
+			e.setAcronyme(acronyme);
+			e.setBestArticle(bestArticle);
+			e.setAcceptances(acceptances);
+			e.setTypeArticles(typeArticles);
+			
+			
+	
+			// Et une liste d'articles
+			NodeList article_nodes = (NodeList)xPath.evaluate(
+				".//article",
+				conf,
+				XPathConstants.NODESET
+			);
+			ArrayList<Article> articles = new ArrayList<Article>();
+			
+			// Pour chaque article :
+			for (int j = 0; j < article_nodes.getLength(); ++j) {
+				Node article_node = article_nodes.item(j);
 				
-				// On récupère ses informations
+				// Récupérer ici les informations à l'aide 
+				// du xpath approprié
+				ArrayList<Author> auteurs = new ArrayList<>();
+				ArrayList<Affiliate> affiliations = new ArrayList<>();
+				String titreArt = "";
+				String type = new String();
+				String resume = "";
+				String abstract_libelle = "";
 				
-				// On finit de builder la conférence
-				// et on l'affecte à la liste des conférences.
+				// On ajoute l'article à la liste d'articles 
+				// de cette conférence
+				Article a = new Article();
+				a.setAuteurs(auteurs);
+				a.setAffiliations(affiliations);
+				a.setTitre(titreArt);
+				a.setType(type);
+				a.setResume(resume);
+				a.setAbstrace_libelle(abstract_libelle);
+				
+				articles.add(a);
+			
+			}  // fin boucle articles	
+			
+			// On finit de builder la conférence
+			// et on l'affecte à la liste des conférences.
+			Conference c = new Conference();
+			c.setEdition(e);
+			c.setArticles(articles);
 			
 		}  // fin boucle conférences
 		
@@ -102,8 +174,8 @@ public class DomXPath {
 	public void dump_node(Node n) {
 		System.out.println("================");
 		System.out.println("Nom : " + n.getNodeName());
-		System.out.println("Texte : ");
-		System.out.println(n.getTextContent());
+		//System.out.println("Texte : ");
+		//System.out.println(n.getTextContent());
 		System.out.println("Attributes : ");
 		System.out.println(n.getAttributes());
 		System.out.println("Num. of children : " + n.getChildNodes().getLength());
