@@ -57,4 +57,9 @@ public class Author
 	{
 		return "Auteur{nom='" + this.nom + "', email='" + this.email + "', affiliations=" + this.affiliationId + "}";
 	}
+	
+	public String to_html() {
+		String html = "";
+		return html;
+	}
 }

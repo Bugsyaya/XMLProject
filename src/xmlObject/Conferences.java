@@ -21,5 +21,8 @@ public class Conferences
 		this.conferences = conferences;
 	}
 	
-	
+	public String to_html() {
+		String html = "";
+		return html;
+	}
 }

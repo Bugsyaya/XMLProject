@@ -67,4 +67,9 @@ public class Conference implements Comparable<Conference>
 		return getEdition().getDateEnd().compareTo(conference.getEdition().getDateEnd());
 	}
 	
+	public String to_html() {
+		String html = "";
+		return html;
+	}
+	
 }

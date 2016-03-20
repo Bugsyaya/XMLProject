@@ -36,4 +36,9 @@ public class Type
 	{
 		return "Type{id='" + this.id + "', name='" + this.name + "'}";
 	}
+	
+	public String to_html() {
+		String html = "";
+		return html;
+	}
 }

@@ -183,4 +183,9 @@ public class Article implements Comparable<Article>
 	{
 		return "Article{id=" + this.id + ", session='" + this.session + "', auteurs=" + this.auteurs + ", affiliations=" + this.affiliations + ", titre='" + this.titre + "', type='" + this.type + "', pages='" + this.page + "', resume='" + this.resume + "', mots_cles='" + this.mot_cle + "', abstract_libelle='" + this.abstrace_libelle + "', keywords='" + this.keyword + "'}";
 	}
+	
+	public String to_html() {
+		String html = "";
+		return html;
+	}
 }
