@@ -1,6 +1,5 @@
 package Parser;
 
-import javax.print.attribute.Attribute;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.xpath.XPath;
@@ -11,7 +10,6 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import xmlObject.Acceptance;
@@ -74,8 +72,6 @@ public class DomXPath {
 
 		// Liste de Conferences (objets) à renvoyer.
 		ArrayList<Conference> conferences = new ArrayList<Conference>();
-		
-		Element root = xmlDocument.getDocumentElement();
 		
 		// Pour chaque conférence dans le document:
 		String expression = "/conferences/conference";	        
@@ -177,7 +173,7 @@ public class DomXPath {
 				edition_node,
 				XPathConstants.NODESET
 			);
-			for(int a = 0; a < type_nodes.getLength(); ++a) {
+			for(int a = 0; a < acceptance_nodes.getLength(); ++a) {
 				Node acceptance_node = type_nodes.item(a);
 				
 				String acc_name = acceptance_node.getTextContent();

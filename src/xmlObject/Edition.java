@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "edition")
 @XmlType(propOrder =
@@ -167,5 +166,10 @@ public class Edition
 	public String toString()
 	{
 		return "Edition{acronyme='" + this.acronyme + "', titre='" + this.titre + "', ville='" + this.ville + "', pays='" + this.pays + "', dateDebut=" + this.dateStart + ", dateFin=" + this.dateEnd + ", presidents=" + this.presidents + ", typeArticles=" + this.typeArticles + ", statistiques=" + this.acceptances + ", siteWeb='" + this.siteWeb + "', meilleurArticle=" + this.bestArticle + "}"; 
+	}
+	
+	public String to_html() {
+		String html = "";
+		return html;
 	}
 }
