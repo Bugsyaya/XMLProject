@@ -25,7 +25,7 @@ public class HtmlGenerate
 
     public static final String HOME_PAGE_FILE_NAME = "TALN_RECITAL.html";
     public static final String HOME_PAGE_TEMPLATE_NAME = "homeTemplate.html";
-    public static final String CONFERENCE_PAGE_TEMPLATE_NAME = "conferenceTemplace.html";
+    public static final String CONFERENCE_PAGE_TEMPLATE_NAME = "conferenceTemplate.html";
     public static final String CONFERENCE_ITEM_TEMPLATE_NAME = "confItemTemplate.html";
 
     private static final SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
