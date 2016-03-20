@@ -53,16 +53,12 @@ public class DomXPath {
 		
 		// Parsing et chargement du doc. en mémoire.
 		try {
-			// getting the default implementation of DOM builder
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			// parsing the XML file
 			xmlDocument = builder.parse(new File(fileName));
 
 		} catch (Exception e) {
-			// catching all exceptions
-			System.out.println();
-			System.out.println(e.toString());
+			System.out.println(e.getMessage());
 		}
 		
 	}
@@ -94,8 +90,7 @@ public class DomXPath {
 				XPathConstants.NODE
 			);
 			
-			// Récupérer ici les informations à l'aide 
-			// du xpath approprié
+			// On extrait les informations dont on a besoin
 			String acronyme = ((Node)xPath.evaluate(
 				".//acronyme",
 				edition_node,
@@ -214,9 +209,10 @@ public class DomXPath {
 			c.setArticles(articles);
 			
 			conferences.add(c);
+			System.out.print(".");
 			
 		}  // fin boucle conférences
-		
+		System.out.println();
 		return conferences;
 		
 	}
