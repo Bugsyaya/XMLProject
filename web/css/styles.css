@@ -1,0 +1,308 @@
+/* --------------------------------------------------------------------------------
+   Modification des styles HTML par defaut
+-------------------------------------------------------------------------------- */
+
+/*
+Couleurs :
+- couleurs du motif : 
+	gris très foncé: #555353, gris foncé: #737171, gris: #A7A5A4 gris clair: #D5D3D2
+	rouge: #CC0000 (= rouge du logo)
+- couleur de fond  : #DDDDDD
+- rouge des titres : #CC0000
+- fond clair       : white
+- liens            : #0000CC
+- bordure grise    : #808080
+
+*/
+
+body { 
+	background: #DDDDDD;
+	color: black;
+	font-family: "Trebuchet MS", Century, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+p {
+}
+
+h1 {
+	color: #CC0000;
+	font-size: 20px;
+}
+
+h2 {
+	color: #CC0000;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+	background: url(../IMG/cadre_h2.jpg) repeat-y left top; 
+	border: #808080 1px solid;
+	position: relative; 
+	moz-border-radius: 5px;
+}
+
+h3, h4 {
+	color: #CC0000;
+}
+
+a {
+	text-decoration: none; color: #0000CC;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* lien externe, (doit être identique à : styles_spip.css/a.spip_out) */
+a.out {
+	padding-right: 13px; background: url(../IMG/out.gif) no-repeat right center;
+}
+
+/* lien mailto */
+a.mailto {
+	padding-right: 20px; background: url(../IMG/mailto.gif) no-repeat right center;
+}
+
+
+/* liste à puce */
+/* type: définit le type de puce (disc, circle, square) */
+ul {
+	type: circle;
+}
+
+/* item de liste */
+li {
+}
+
+/* tableau */
+/* border-style : none, dotted, dashed, solid, double, groove, ridge, inset, outset */
+.tableau {
+	border: 1px solid #808080;
+	background-color: white;
+	padding: 1px;
+	border-spacing: 1px;
+}
+
+.cell {
+	border: 1px solid #C0C0C0;
+	padding-left: 3pt;
+	padding-right: 3pt;
+}
+
+/* --------------------------------------------------------------------------------
+   Styles généraux des feuilles et cadres
+-------------------------------------------------------------------------------- */
+
+#banniere {
+}
+
+#navigation {
+}
+
+#principal {
+}
+
+#pied {
+	font-family: "Comic Sans MS", Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	text-align: right;
+}
+
+/* --------------------------------------------------------------------------------
+   Styles pour le contenu (la colonne principale)
+-------------------------------------------------------------------------------- */
+
+.contenu {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* titre du contenu (rubrique, article, etc.) */
+/* En première ligne du cadre principal des pages */
+.contenu h1 {
+}
+
+/* titre de section (ex: liste des articles) */
+.contenu h2 {
+}
+
+/* petit encadré donnant un descriptif rapide */
+.contenu .chapo {
+}
+
+/* sur-titre et sous-titre */
+.contenu .surtitre, .soustitre {
+	font-size: 14px;
+	font-weight: bold;
+	font-variant: small-caps;
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*
+.contenu h2.titre-extrait {
+	font-size: 160%;
+	font-weight: bold;
+}
+
+.contenu .detail {
+	color: green;
+	margin-left: 2em;
+	font-size: 80%;
+	color: #303030;
+}
+
+.contenu .detail .important {
+	color: #a02020;
+}
+
+.extrait {
+	margin: 0.1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: 2em;
+	margin-right: 0.1em;
+	line-height: 1.4em;
+	border: groove 2px #a0a0a0;
+	padding: 1em;
+	font-size: 85%;
+}
+
+.liste-articles {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	clear: left;
+}
+
+.contenu .forum-repondre {
+	text-align: left;
+	font-size: 90%;
+	font-weight: bold; 
+	margin-top: 0.6em;
+}
+*/ 
+
+
+.texte-conference {}
+.contenu .texte-conference { 
+	background: #FFFFFF;
+	font-family: monospace;
+	font-size: smaller;
+	white-space: pre;
+	padding-left: 20px;
+	border: #808080 1px solid;
+}
+
+a.espace-prive { 
+        font-size: 70%;
+ }
+
+
+/* Styles pour affichage de listes de titres d'articles   */
+/*   dans une rubrique                                    */
+/* Ici, rubrique TAL                                      */
+
+.infoTAL td {  
+        padding-right: 18px;
+        vertical-align: top;
+}
+.infoTAL ul { 
+        margin-top: 0px;
+ }
+
+
+/* Articles syndiqués via RSS */
+.liste-syndicart blockquote { 
+        margin-top: 0px;
+        margin-bottom: 2px;
+        font-size: 90%;
+ }
+
+/* Bloc pour le lien hypertexte associé à un article */
+
+.lien-article { 
+       margin-top: 32px;
+ }
+
+/* Antsipam: cache du texte (farci dans une adresse email) */
+
+.antispam { 
+    display: none;
+ }
+
+.sommaireTAL table.spip { 
+     background-color: transparent;
+     border-style: none;
+ }
+.sommaireTAL table.spip td { 
+     vertical-align: text-top;
+     border-style: none;
+ }
+
+/***************************************/
+/* Styles pour les N° en ligne de TAL  */
+/***************************************/
+
+.e-tal-page { 
+     width: 44em;
+ }
+
+.e-tal-auteur { 
+     font-weight: bold;
+     font-size: 14px;
+ }
+
+.e-tal-affil { 
+     font-style: italic;
+ }
+
+.e-tal-resume { 
+     font-style: italic;
+     text-align: justify;
+ }
+
+/*** Documents joints ***/
+
+table.e-tal-documents-joints {
+
+	background: #efefef;
+}
+
+.e-tal-documents-joints tr.lien-download {
+	border: 1px solid black;
+}
+
+.e-tal-documents-joints td.td-lien-download {
+	text-align: right;
+	font-size: 10px;
+}
+
+
+     /* Pages de sommaire de N° (et de Volumes) */
+
+.eTAL-auteur { 
+     font-variant: small-caps;
+ }
+
+.eTAL-sommaire li { 
+     list-style-type: none;
+     margin-bottom: 10px;
+ }
+
+.titre-no-TAL {
+	font-style: italic;
+}
+
+
+/* Affichage des JE en liste */
+
+ul.JE li { 
+     margin-bottom: 6px;
+ }
+
+
+/* Icones des document joints */
+
+/* .spip_logos { height: 32px; } */
+ 
