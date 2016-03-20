@@ -1,5 +1,8 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -14,40 +17,41 @@ import Parser.HtmlGenerate;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		Launcher launcher = new Launcher_SAX();
 
-		System.out.println("Début des tests");
-		System.out.println("===============");
+		System.out.println("Quelle implémentation pour générer le html ?");
+		System.out.println("  (d) : DomXPath");
+		System.out.println("  (s) : SAX (par défaut)");
+		System.out.println("  (q) : quitter");
 		
-		
-		System.out.println();
-		System.out.println("Test du parser Sax");
-		System.out.println("=======================");
-		final ArrayList<Conference> conferencesSax = new Sax(HtmlGenerate.XML_FILE_NAME).parserXml();
-
-		System.out.println(HtmlGenerate.XML_FILE_NAME);
-		
-        if (conferencesSax != null) {
-            System.out.println(conferencesSax.size() + " conférences ont été récupérées du fichier XML\n");
-            HtmlGenerate.generateHomePage(conferencesSax);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String selectedOption = ""; 
+        try {
+            selectedOption = br.readLine();
+            switch (selectedOption) {
+                case "d":
+                    launcher = new Launcher_DomXPath();
+                    break;
+                case "s":
+                	launcher = new Launcher_SAX();
+                    break;
+                case "q":
+                    System.exit(0);;
+                    break;
+                default:
+                	main(new String[] {});
+            }
+        } catch (IOException ioe) {
+        	main(new String[] {});
         }
 		
-		System.out.println();
-		System.out.println("Test du parser DomXPath");
-		System.out.println("=======================");
-		DomXPath parser = new DomXPath(HtmlGenerate.XML_FILE_NAME);
-		System.out.print("L'analyse du document peut prendre quelques secondes...");
-		try {
-			ArrayList<Conference> conferences = parser.buildConferences();
-			for (Conference c: conferences) {
-				System.out.println("Conférence : " + c.getEdition().getTitre());
-				for (Article a: c.getArticles()) {
-					System.out.println(" . " + a.getTitre());
-				}
-			}
-		} catch(XPathExpressionException e) {
-			System.out.println("Problème dans l'expression XPath : ");
-			System.out.println(e.getMessage());
-		}
+		
+		launcher.run();
+		
+
+		
+
 		
 	}
 
