@@ -1,0 +1,55 @@
+/* --------------------------------------------------------------------------
+ * Feuille de style définissant la structure générale (cadres des pages).
+ * Auteur : Igor Schadle
+ * Dernière mise à jour : 12/01/05
+ * -------------------------------------------------------------------------- */
+
+body {
+	margin: 10px;
+	padding: 0px;
+}
+
+/* --------------------------------------------------------------------------
+   Bannière : en haut, sur toute la largeur
+ * -------------------------------------------------------------------------- */
+
+#banniere {
+	margin:  0px;
+	padding: 0px;
+	width: 100%;
+}
+/* --------------------------------------------------------------------------
+   Cadre de navigation à gauche.
+   Partage la largeur avec le cadre principal.
+ * -------------------------------------------------------------------------- */
+
+#navigation {
+	margin:  0px;
+	padding: 0px;
+	float: left; 
+	width: 200px;
+}
+
+/* --------------------------------------------------------------------------
+   Cadre principal.
+   Partage la largeur avec le cadre de navigation à sa gauche.
+   Note : le "margin-left" simule la colonne de gauche.
+ * -------------------------------------------------------------------------- */
+
+#principal {
+	margin:  0px;
+	padding: 0px;
+	margin-left: 220px;
+}
+
+/* --------------------------------------------------------------------------
+   Pied de page : en bas, sur toute la largeur.
+ * -------------------------------------------------------------------------- */
+
+#pied {
+	margin:  0px;
+	margin-left: 220px;
+	padding: 0px;
+	padding-top: 10px;
+	border-top: 1px solid black;
+}
