@@ -14,8 +14,6 @@ import Parser.HtmlGenerate;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		String fileName = "xmlFile/TALN-RECITAL-BIB.xml";
 
 		System.out.println("Début des tests");
 		System.out.println("===============");
@@ -34,7 +32,7 @@ public class Main {
 		System.out.println();
 		System.out.println("Test du parser DomXPath");
 		System.out.println("=======================");
-		DomXPath parser = new DomXPath(fileName);
+		DomXPath parser = new DomXPath(HtmlGenerate.XML_FILE_NAME);
 		System.out.print("L'analyse du document peut prendre quelques secondes...");
 		try {
 			ArrayList<Conference> conferences = parser.buildConferences();
